@@ -187,7 +187,7 @@ The country of Ireland, where I lived for two years, was going through a housing
                     # Return the updated DataFrame
                     return dfRent  
 
-## 5 Methodology
+## Methodology
     
 ### Data Visualization Workflow:
 
@@ -205,16 +205,16 @@ The country of Ireland, where I lived for two years, was going through a housing
     <img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_1_TabeauTextTable.png" alt="Map" width="500" height="600">
 
 
-## 6 Results and Insights
+## Results and Insights
 *   The graph makes it easy to see that prices began increasing around 2015, not just after COVID, with rising trends observed across all counties.
 *   Most of the largest counties, such as Dublin and those surrounding it, as well as Cork, Limerick, and Galway, have higher prices and show similar behavior.  
 
-## 7 Code Repository  
+## Code Repository  
 The code for this project is hosted on GitHub. You can access the repository via the following link:  
 
 [Housing Rent Analysis in Ireland - GitHub Repository](https://github.com/jvilchesf/Housing_rent_Ireland/tree/main)  
 
-## 8 Visualizations  
+## Visualizations  
 The interactive Tableau dashboard showcasing the analysis can be accessed below:  
 
 
