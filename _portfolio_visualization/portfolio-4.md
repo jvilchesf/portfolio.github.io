@@ -14,7 +14,7 @@ The target audience includes professionals and residents who live and work in Ne
 
 Below is a preview of the Tableau dashboard created from the processed dataset. This dashboard enables users to interactively explore NYC real estate trends, filtering by borough, time period, and various building attributes to uncover insights into permit approvals, construction costs, and job types.
 
-<img src = "https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_4_nyc_dashboard.png" tab = "NYC Real states DOB" height = "600px">
+<img src = "https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_4_nyc_dashboard.png" tab = "NYC Real states DOB" width = "1000px" height = "1000px">
 
 * Note: The above image is a placeholder. The link to the actual version can be found at the end of this publication.
 
