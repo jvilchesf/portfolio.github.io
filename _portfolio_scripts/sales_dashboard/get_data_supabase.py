@@ -18,7 +18,7 @@ current_directory = os.getcwd()
 
 # Initialize Supabase client
 SUPABASE_URL = "https://zqrrxvrwcnjpitiinsjt.supabase.co"
-SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpxcnJ4dnJ3Y25qcGl0aWluc2p0Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY0ODU0MzY2NywiZXhwIjoxOTY0MTE5NjY3fQ.la6kxVD09q8-YdZaH5pjLn1vwqal7Xd1cEXvvbYGilo"
+SUPABASE_KEY = ""
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 
