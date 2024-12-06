@@ -32,13 +32,13 @@ The dashboard provided the client with:
 **Access the dashboard** [here](https://lookerstudio.google.com/u/0/reporting/cdc372da-515a-4510-9c68-ed8da67b1d63/page/p_13p464yedd).
 
 <div style="text-align: center;">  
-    <img src="/images/portfolio_viz_3_dashboard.png" alt="Sales Dashboard" width="600" height="600">
+    <img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_3_dashboard.png" alt="Sales Dashboard" width="600" height="600">
 </div>
 
 ## Workflow Diagram
 
 <div style="text-align: center;">
-    <img src="/images/portfolio_viz_3_workflow.png" alt="Workflow Diagram" width="600" height="600">
+    <img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_3_workflow_.png" alt="Workflow Diagram" width="600" height="600">
 </div>
 
 ---
@@ -105,7 +105,7 @@ This project integrated data from four key sources:
 
 ## Code Repository
 
-Access the full repository [here](https://github.com/jvilchesf/portfolio.github.io/tree/main/_portfolio_scripts).
+Access the full repository [here](https://github.com/jvilchesf/portfolio.github.io/tree/main/_portfolio_scripts/sales_dashboard).
 
 ### Key Scripts:
 - **Supabase**:
