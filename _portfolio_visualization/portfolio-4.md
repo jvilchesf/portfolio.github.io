@@ -1,5 +1,5 @@
 ---
-title: "[NYC Real Estate Trends] Data Visualization & Analysis"
+title: "[Tableau] NYC Real Estate Trends"
 excerpt: "Tableau dashboards to explore New York City's real estate landscape."
 collection: portfolio
 ---
@@ -14,7 +14,7 @@ The target audience includes professionals and residents who live and work in Ne
 
 Below is a preview of the Tableau dashboard created from the processed dataset. This dashboard enables users to interactively explore NYC real estate trends, filtering by borough, time period, and various building attributes to uncover insights into permit approvals, construction costs, and job types.
 
-<img src = "https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_4_nyc_dashboard.png" tab = "NYC Real states DOB">
+<img src = "https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_4_nyc_dashboard.png" tab = "NYC Real states DOB" width = "800">
 
 * Note: The above image is a placeholder. The link to the actual version can be found at the end of this publication.
 
@@ -122,9 +122,7 @@ The workflow integrated NYC open data, Python for data processing, and Tableau f
 
 - **Data Preparation**: Python was used for all ETL (Extract, Transform, Load) steps.
 - **Visualization in Tableau**:
-  - **Maps**: Display the geographic distribution of permit approvals.
-  - **Trend Lines**: Show how approval counts or construction costs have evolved over time.
-  - **Bar Charts & Tables**: Allow users to filter by job type, borough, and status, making it easy to identify patterns or anomalies.
+  - **Maps**: Display the geographic distribution of permit approvals was the main approach used for this dasbhoard.
 
 *Due to confidentiality in certain proprietary datasets, the sample dashboard shown utilizes public data. All personal identifying information (PII) is not included or is masked if required by data privacy regulations.*
 
