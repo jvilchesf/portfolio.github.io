@@ -4,15 +4,15 @@ excerpt: "An interactive dashboard for tracking daily subscription sales<br/><im
 collection: portfolio
 ---
 
-## Overview
+# Overview
 
 This project involved integrating multiple technologies to create a unified solution for tracking and analyzing sales data. The client, a subscription-based company, transitioned from using Facebook Pixel and Google Analytics to leveraging **Google Cloud Platform (GCP)**, including **GA4** and **Google Tag Manager (GTM)**, for enhanced sales tracking.
 
-## Problem Statement
+# Problem Statement
 
 While the existing setup tracked daily sales effectively, it lacked visibility into monthly subscription renewals. Additionally, new data sources from **Supabase** and **Google Sheets** introduced the challenge of consolidating diverse datasets into a single, comprehensive view. This required building a unified solution to track sales performance across multiple channels.
 
-## Solution
+# Solution
 
 The deliverable was an **interactive Looker Studio dashboard**, updated daily, consolidating data from:
 - **GA4 (via GTM)**: For tracking daily sales and user interactions.
@@ -20,30 +20,10 @@ The deliverable was an **interactive Looker Studio dashboard**, updated daily, c
 - **Google Sheets**: For additional revenue streams.
 - **Stripe**: For matching the numbers 
 
-## Outcome
-
-The dashboard provided the client with:
-- **Centralized Insights**: A unified view of sales performance across all channels.
-- **Enhanced Decision-Making**: Real-time monitoring of daily and monthly sales trends.
-- **Campaign Effectiveness**: Insights into high-performing social media campaigns.
-
-
-
-**Access the dashboard** [here](https://lookerstudio.google.com/u/0/reporting/cdc372da-515a-4510-9c68-ed8da67b1d63/page/p_13p464yedd).
-
-<div style="text-align: center;">  
-    <img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_3_dashboard.png" alt="Sales Dashboard" width="600" height="600">
-</div>
-
-## Workflow Diagram
-
-<div style="text-align: center;">
-    <img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_3_workflow_.png" alt="Workflow Diagram" width="600" height="600">
-</div>
 
 ---
 
-## Tools and Technologies
+# Tools and Technologies
 
 The following tools and technologies were utilized to streamline data integration, processing, and visualization:
 
@@ -53,28 +33,48 @@ The following tools and technologies were utilized to streamline data integratio
 - **Google Analytics 4 (GA4)**: For capturing customer behavior and tracking key metrics.
 - **Looker Studio**: For creating dynamic dashboards with real-time updates.
 
+
+# Outcome
+
+The dashboard provided the client with:
+- **Centralized Insights**: A unified view of sales performance across all channels.
+- **Enhanced Decision-Making**: Real-time monitoring of daily and monthly sales trends.
+- **Campaign Effectiveness**: Insights into high-performing social media campaigns.
+
+**Access the dashboard** [here](https://lookerstudio.google.com/u/0/reporting/cdc372da-515a-4510-9c68-ed8da67b1d63/page/p_13p464yedd).
+
+<div style="text-align: center;">  
+    <img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_3_dashboard.png" alt="Sales Dashboard" width="600" height="600">
+</div>
+
+# Workflow Diagram
+
+<div style="text-align: center;">
+    <img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_3_workflow_.png" alt="Workflow Diagram" width="600" height="600">
+</div>
+
 ---
 
-## Dataset Description and Methodology
+# Dataset Description and Methodology
 
 This project integrated data from four key sources:
 
-### 1. Supabase Sales Data
+## 1. Supabase Sales Data
 - **Records**: 5,072,138
 - **Fields**: `payment_id`, `payment_amount`, `payment_date`, `subscription_id`, `checkout_status`
 - **Purpose**: Tracks payments, subscriptions, and user activity.
 
-### 2. Stripe Sales Data
+## 2. Stripe Sales Data
 - **Records**: 279,895
 - **Fields**: `id`, `amount`, `fee`, `customer_email`, `currency`
 - **Purpose**: Captures Stripe transaction details, including fees and customer information.
 
-### 3. Live Accounts Data (Google Sheets)
+## 3. Live Accounts Data (Google Sheets)
 - **Records**: 38,573
 - **Fields**: `FULL_NAME`, `BALANCE`, `COUNTRY`, `TX_STRIPE_ID`
 - **Purpose**: Provides user account information, including demographics and financial data.
 
-### 4. GA4 Event Data
+## 4. GA4 Event Data
 - **Records**: 13,497,845
 - **Fields**: `event_name`, `event_params`, `user_id`, `platform`
 - **Purpose**: Tracks user interactions, app behavior, and traffic sources.

@@ -13,17 +13,18 @@ To achieve this, I created a Looker Studio dashboard that clearly displays the p
 At that time, the team responsible for tracking project completion was using Excel for this task, which required a manual weekly effort to compile the necessary information. This is why the primary goal was to automate this process and ensure the consistent use of the dashboard.
 
 
-## Tools and Technologies  
+# Tools and Technologies  
 To complete this project, I utilized the following tools:  
 
 - **Python**: Developed the Python code in Google Colab. The `gspread` library was used to read data from a Google Spreadsheet, while `pandas` was employed to clean and structure the data.  
 - **Looker Studio**: Designed and created a dashboard to visualize the processed data, making it easier to analyze and summarize key insights.  
 
-## Dataset Description and Methodology  
-### Source  
+# Dataset Description and Methodology  
+
+## Source  
 - **Google Sheets**: The data was sourced from a Google Sheet.  
 
-### Size and Structure  
+## Size and Structure  
 - Size: 8000+ rows
 - The initial data structure presented a significant challenge. Instead of having a single structured sheet, the dataset was spread across 60 different sheets. The task involved consolidating all this information into a single comprehensive DataFrame, ensuring consistency and usability for further analysis.  
 
@@ -48,11 +49,11 @@ To complete this project, I utilized the following tools:
 
 
 
-### Preprocessing: Steps taken to clean, transform, or augment the data.
+# Preprocessing: Steps taken to clean, transform, or augment the data.
 
 This section outlines the steps taken to clean and structure the data, with snippets of Python code for illustration.
 
-### 1. Authenticate and Connect to Google Sheets
+## 1. Authenticate and Connect to Google Sheets
 The first step is to authenticate the user and establish a connection to the required Google Sheets.
 
         ```python
@@ -66,7 +67,7 @@ The first step is to authenticate the user and establish a connection to the req
         sh_master = gc.open('2024_Breeding Season_QC List  - VH (5)')  # Read Google Sheet file
         sh_schedule = gc.open('Breeding Season 2024 Schedule')  # Read Google Sheet file  
 
-### 2.  Handle Merged Cells
+## 2.  Handle Merged Cells
 A custom function is used to handle merged cells in the first three columns, ensuring data integrity.
 
         def fill_merged_cells(data):
@@ -81,7 +82,7 @@ A custom function is used to handle merged cells in the first three columns, ens
                                 break
             return data
 
-### 3. Define Columns to Retain
+## 3. Define Columns to Retain
 Specify the columns of interest to filter out unnecessary data.
 
         columns_to_keep = [
@@ -96,7 +97,7 @@ Specify the columns of interest to filter out unnecessary data.
             'Shapefile Produced (GIS)'
         ]
 
-### 4. Read and Process Each Sheet
+## 4. Read and Process Each Sheet
 Iterate through the sheets, handle merged cells, and convert data into pandas DataFrames.
 
         df_list = []
@@ -113,7 +114,7 @@ Iterate through the sheets, handle merged cells, and convert data into pandas Da
                     df_list.append(df)
 
 
-### 5. Consolidate Data
+## 5. Consolidate Data
 Combine all individual DataFrames into a single DataFrame for analysis.
 
         if df_list:
@@ -121,7 +122,7 @@ Combine all individual DataFrames into a single DataFrame for analysis.
             df_qc_list = df_qc_list.drop(['Date Scheduled', ' Staysafe / Whatsapp'], axis=1)
             df_qc_list['execution_date'] = datetime.now().strftime("%Y-%m-%d")
 
-### 6. Append Cleaned Data to Google Sheets
+## 6. Append Cleaned Data to Google Sheets
         The cleaned and structured data is appended to an existing Google Sheet for further use.
 
                 spreadsheet = gc.open('QC_list_summarize_v1')
@@ -139,9 +140,9 @@ Combine all individual DataFrames into a single DataFrame for analysis.
                 worksheet.update_cells(cell_list, value_input_option='USER_ENTERED')
 
 
-## Methodology  
+# Methodology  
 
-### Data Visualization Workflow  
+## Data Visualization Workflow  
 - The workflow integrated **Google Sheets**, **Google Colab**, and **Looker Studio**, leveraging the convenience and capabilities of Google Cloud Platform. The automation of the code was not necessary, as the client preferred to run the code on demand.  
 - The visualization included:  
   - A header summarizing the main KPIs.  
@@ -151,7 +152,7 @@ Combine all individual DataFrames into a single DataFrame for analysis.
 
 <img src="/images/porftolio_viz_2_qc_list.png" alt="Quality Control Manager, Project Monitoring">  
 
-## Challenges and Solutions  
+# Challenges and Solutions  
 
 - **Challenge:** The main difficulty was not the technical skills required to write the Python code or create the visualization. Instead, the challenge was understanding the problem and ensuring clear communication with the client.  
 - **Solution:** Establishing a strong understanding of the client's needs and maintaining effective communication was key to the project's success. This ensured the final product met expectations and provided the desired insights.  

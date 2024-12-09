@@ -1,6 +1,6 @@
 ---
 title: "[Tableau] NYC Real Estate Trends"
-excerpt: "Tableau dashboards to explore New York City's real estate landscape."
+excerpt: "Tableau dashboards to explore New York City's real estate landscape.<br/><img src='https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/main/images/portfolio_viz_4_nyc_dashboard.png' width=300 height=300>"
 collection: portfolio
 ---
 
@@ -10,7 +10,13 @@ This project focuses on exploring and visualizing real estate trends in New York
 
 The target audience includes professionals and residents who live and work in New York City and are interested in real estate trends, data-driven insights, and the evolving landscape of apartment buildings. The content is aimed at individuals who wish to gain a nuanced understanding of the city’s economic health, regulatory environment, and ongoing developmental patterns.
 
-## Outcome
+# Tools and Technologies
+
+- **Python (pandas, polars)**: Employed for data cleaning, processing, and aggregation of publicly available permit application data.
+- **Tableau**: Used to create an interactive dashboard enabling easy exploration of trends, filtering by borough, year, job type, and other relevant metrics.
+- **Seaborn & Matplotlib**: Utilized for preliminary data exploration and static visualizations during the analysis phase.
+
+# Outcome
 
 Below is a preview of the Tableau dashboard created from the processed dataset. This dashboard enables users to interactively explore NYC real estate trends, filtering by borough, time period, and various building attributes to uncover insights into permit approvals, construction costs, and job types.
 
@@ -18,21 +24,15 @@ Below is a preview of the Tableau dashboard created from the processed dataset. 
 
 * Note: The above image is a placeholder. The link to the actual version can be found at the end of this publication.
 
-## Tools and Technologies
+# Dataset Description and Methodology
 
-- **Python (pandas, polars)**: Employed for data cleaning, processing, and aggregation of publicly available permit application data.
-- **Tableau**: Used to create an interactive dashboard enabling easy exploration of trends, filtering by borough, year, job type, and other relevant metrics.
-- **Seaborn & Matplotlib**: Utilized for preliminary data exploration and static visualizations during the analysis phase.
-
-## Dataset Description and Methodology
-
-### Source
+## Source
 
 - **NYC DOB Job Application Filings Dataset**: This dataset includes details on building permit applications, approvals, and related metrics. It provides insights into construction activity, renovations, and regulatory compliance in the city.
 - **Source Link** [here](https://data.cityofnewyork.us/Housing-Development/DOB-Job-Application-Filings/ic3t-wcy2/about_data).
 
 
-### Size and Structure
+## Size and Structure
 
 - The raw dataset includes thousands of rows detailing permit applications and 96 columns.
 - Key fields include:
@@ -48,26 +48,26 @@ Below is a preview of the Tableau dashboard created from the processed dataset. 
   - **Initial Cost**: Estimated initial project cost.
   - **Fully Paid**: Indicates whether all related fees or payments are settled.
 
-### Preprocessing Steps
+# Preprocessing: Steps taken to clean, transform, or augment the data.
 
-1. **Reading and Cleaning Data**:  
+## 1. Reading and Cleaning Data:  
    Data was loaded using `polars` and converted to `pandas` for compatibility. We applied schema overrides and handled potential null values.  
    
-2. **Datetime Parsing**:  
-   The 'Approved' date field was parsed into a proper datetime format to filter by approval year.
+## 2. Datetime Parsing:  
+   The 'Approved' date field was parsed into a proper datetime format to filter by approval year. 
 
-3. **Year Filtering**:  
+## 3. Year Filtering:  
    Focused on approvals in 2023 and 2024 to understand recent trends.
 
-4. **Aggregations**:  
+## 4. Aggregations:  
    Grouped data by Borough, Job Type, Job Status, and other dimensions to calculate:
    - Average GIS coordinates for geospatial patterns.
    - Summations of the 'Initial Cost' to understand financial trends.
    
-5. **Exporting Data**:  
+## 5. Exporting Data:  
    A consolidated and cleaned CSV output was generated for ingestion into Tableau, ensuring a smooth data-to-dashboard workflow.
 
-### Code Example
+# Code Example
 
 Below is a code snippet that illustrates the data cleaning and aggregation process. This code reads the DOB job application filings dataset, filters by the approval years 2023 and 2024, aggregates key metrics, and exports the cleaned dataset as a CSV for Tableau visualization.
 
@@ -114,35 +114,35 @@ Below is a code snippet that illustrates the data cleaning and aggregation proce
             # Export to CSV for Tableau
             grouped_df.to_csv('/path/to/job_application_filings_output.csv', index=False)
 
-## Methodology
+# Methodology
 
 The workflow integrated NYC open data, Python for data processing, and Tableau for visualization. By preparing a clean and structured dataset, we empower interactive dashboards that allow stakeholders to examine trends by borough, time period, building type, and more.
 
-### Data Visualization Workflow
+## Data Visualization Workflow
 
 - **Data Preparation**: Python was used for all ETL (Extract, Transform, Load) steps.
 - **Visualization in Tableau**:
   - **Maps**: Display the geographic distribution of permit approvals was the main approach used for this dasbhoard.
 
-*Due to confidentiality in certain proprietary datasets, the sample dashboard shown utilizes public data. All personal identifying information (PII) is not included or is masked if required by data privacy regulations.*
+- Due to confidentiality in certain proprietary datasets, the sample dashboard shown utilizes public data. All personal identifying information (PII) is not included or is masked if required by data privacy regulations.*
 
-### Challenges and Solutions
+# Challenges and Solutions
 
 - **Challenge**: Understanding the underlying dataset and its intricacies—especially dealing with numerous building classes, job types, and borough-level nuances—was time-consuming.
 - **Solution**: Extensive data exploration and communication with the client to clarify data elements and business objectives ensured that the final product matched the user’s needs for actionable insights.
 
-### Impact
+# Impact
 
 - **Informed Decision-Making**: Stakeholders can quickly identify neighborhood-level trends, understanding where construction is booming or slowing.
 - **Market Insights**: Owners and investors can track construction approvals, costs, and building types to guide strategic decisions.
 - **Time Savings**: Automated data cleaning and preparation pipelines reduce manual work and help clients focus on analysis and interpretation rather than data wrangling.
 
-### Code Repository
+# Code Repository
 
 The Python script used for processing and aggregation is available on GitHub:  
 [NYC Real Estate Data - Code Repository](https://github.com/jvilchesf/portfolio.github.io/tree/main/_portfolio_scripts/nyc_realstates)
 
-### Visualization Link
+# Visualization Link
 
 The interactive Tableau dashboard is accessible here:  
 [NYC Real Estate Trends - Tableau Dashboard](https://public.tableau.com/app/profile/jose.miguel.vilches.fierro/viz/Job_application_filling/Dashboard1) 

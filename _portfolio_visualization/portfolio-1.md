@@ -5,20 +5,20 @@ excerpt: "Dashboard of historical Average Rent Prices Ireland<br/>
 collection: portfolio
 ---
 
-## Overview  
+# Overview  
 
 The objective of this project is to create a visualization to compare rent prices in Ireland across different years and regions of the country.  
 The deliverable is a Tableau Dashboard, which has been uploaded to the Tableau Public server.
 
 The country of Ireland, where I lived for two years, was going through a housing crisis, and I wanted to understand how significant this crisis was in terms of rent prices. I also wanted to know the percentage by which prices had increased since COVID.
 
-## Tools and technologies
+# Tools and technologies
 
-* To approach this project I used:
-    * Python: Using the requests and pandas libraries, I successfully retrieved from a public repository, got geo coordinates and structured the data.
-    * Tableau: Using Tableau I created a dashboard to show the data already structured.
+- To approach this project I used:
+    - Python: Using the requests and pandas libraries, I successfully retrieved from a public repository, got geo coordinates and structured the data.
+    - Tableau: Using Tableau I created a dashboard to show the data already structured.
 
-## Workflow Diagram
+# Workflow Diagram
 
 * This diagram is intended to provide an overview of the workflow.
 
@@ -26,13 +26,13 @@ The country of Ireland, where I lived for two years, was going through a housing
     <img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/Workflow_diagram.png" alt="Workflow Diagram" width="200" height="200">
 </div>
 
-## Dataset Description and Methodology
+# Dataset Description and Methodology
 
-### Source: https://data.cso.ie/ 
+## Source: https://data.cso.ie/ 
 - URL Rent prices: https://data.cso.ie/table/RIA02
 - URL Census: https://data.cso.ie/table/F1001
 
-
+## Size and Structure  
 ### Rent Prices Dataset - 300.000+ rows
 
 | **Column**            | **Description**                                      |
@@ -57,13 +57,10 @@ The country of Ireland, where I lived for two years, was going through a housing
 | VALUE                 | Numerical value of the statistic.   
 
 
-### Preprocessing: Steps taken to clean, transform, or augment the data.
+# Preprocessing: Steps taken to clean, transform, or augment the data.
 
-* **Clean Rent Data:** 
-    * Format column names
-    * Drop unnecessary columns
-    * Remove null values 
-    * Group Data  
+## 1. Clean Rent Data
+The first step is to format column names, drop unnecessary colums, remove nulls values and group data.
 
                 ```python
                 # Function to clean and process the Rent dataset
@@ -102,13 +99,10 @@ The country of Ireland, where I lived for two years, was going through a housing
                 df_group = dfRent.groupby(['Number_of_bedrooms', 'Property_Type'])['Price'].sum()
 
                 # Return the cleaned Rent DataFrame
-                return dfRent
+                return dfRent  
 
-* **Clean Census Data:**    
-
-    *   Drop unnecessary columns
-    *   Format column names
-    *   Parse columns data type  
+## 2. Clean Census data:
+Drop unnecessary columns, format column names, and parse the correct data types for each column.
 
                 ```python
                 # Function to clean and process the Census dataset
@@ -140,11 +134,9 @@ The country of Ireland, where I lived for two years, was going through a housing
                     # Return the cleaned Census DataFrame
                     return dfCensus
 
-* **Data Augmentetion:**    
+## 3. Data Augmentation
 
-    *   Create a "Location" column base on State/Province.
-    *   Use "Location" to get "Latitued" and "Longittued
-
+Create a "Location" column based on State/Province and use it to obtain "Latitude" and "Longitude."
                 ```python
                 # Function to add standardized location information and geographic coordinates to the DataFrame
                 def add_location(dfRent):
@@ -187,9 +179,9 @@ The country of Ireland, where I lived for two years, was going through a housing
                     # Return the updated DataFrame
                     return dfRent  
 
-## Methodology
+# Methodology
     
-### Data Visualization Workflow:
+## Data Visualization Workflow:
 
 * I used Tableau to create three main visuals to analyze how rent prices have changed over the years:
     * A map visualization to filter data by each county in Ireland.  
@@ -205,16 +197,16 @@ The country of Ireland, where I lived for two years, was going through a housing
     <img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_1_TabeauTextTable.png" alt="Map" width="500" height="600">
 
 
-## Results and Insights
+# Results and Insights
 *   The graph makes it easy to see that prices began increasing around 2015, not just after COVID, with rising trends observed across all counties.
 *   Most of the largest counties, such as Dublin and those surrounding it, as well as Cork, Limerick, and Galway, have higher prices and show similar behavior.  
 
-## Code Repository  
+# Code Repository  
 The code for this project is hosted on GitHub. You can access the repository via the following link:  
 
 [Housing Rent Analysis in Ireland - GitHub Repository](https://github.com/jvilchesf/Housing_rent_Ireland/tree/main)  
 
-## Visualizations  
+# Visualizations  
 The interactive Tableau dashboard showcasing the analysis can be accessed below:  
 
 
