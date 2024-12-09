@@ -43,11 +43,11 @@ for row in result:
 try:
     # Establish a new connection to the database
     connection = mysql.connector.connect(
-        host="185.109.104.154",  # Ngrok's public host
-        port = 11556,
-        user= 'lookertool',
-        password= 'p4ssw0rd!',
-        database='cdr'
+        host="",  # Ngrok's public host
+        port = ,
+        user= '',
+        password= '!',
+        database='
     )
 
     if connection.is_connected():
