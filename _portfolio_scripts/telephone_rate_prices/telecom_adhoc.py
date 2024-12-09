@@ -29,11 +29,11 @@ one_week_ago_midnight_str = (datetime.now() - timedelta(days = set_days)).replac
 try:
     # Establish a new connection to the database
     connection = mysql.connector.connect(
-        host="185.109.104.154", 
+        host="", 
         port = 11556,
-        user= 'lookertool',
-        password= 'p4ssw0rd!',
-        database='cdr'
+        user= '',
+        password= '',
+        database=''
     )
 
     if connection.is_connected():
