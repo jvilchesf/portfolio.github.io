@@ -27,14 +27,14 @@ This company provides telephone services to several businesses, with a cost asso
     - Looker Studio is the final layer where the dashboard is displayed.
 
 <div style="text-align: center;">
-    <img src="/images/portfolio_viz_5_workflow.png" alt="Workflow Diagram" width="400" height="400">
+    <img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_5_workflow.png" alt="Workflow Diagram" width="400" height="400">
 </div>
 
 # Outcome
 
 The final Looker Studio dashboard offers users an intuitive, interactive platform to explore pricing differences, track trends over time, and gain insights into their call provider costs. By leveraging the processed dataset, the dashboard allows for dynamic filtering and clear visual comparisons, empowering decision-makers to quickly identify the most cost-effective options.
 
-<img src="/images/porfolio_viz_5_telephone_dashboard.png" alt="Telephone Dashboard Preview" width="600" height="600" >
+<img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/porfolio_viz_5_telephone_dashboard.png" alt="Telephone Dashboard Preview" width="600" height="600" >
 
 *Note: The above image is a placeholder. A link to the live dashboard is provided at the end of this publication.*
 
@@ -198,7 +198,7 @@ The final dashboard presents a clear comparison of different telephone call prov
 # Code Repository
 
 The Python script used for processing and aggregation is available on GitHub:  
-[Telephone company - Code Repository](https://github.com/jvilchesf/portfolio.github.io/tree/main/_portfolio_scripts/nyc_realstates)
+[Telephone company - Code Repository](https://github.com/jvilchesf/portfolio.github.io/tree/main/_portfolio_scripts/telephone_rate_prices)
 
 # Visualization Link
 
