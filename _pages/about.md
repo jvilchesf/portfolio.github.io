@@ -45,4 +45,12 @@ Freelancer 🧑‍💻 🌟
 ------
 Over the past year, I've worked on various projects, one of which has lasted over eight months, primarily in the data visualization field. Thanks to my intensive Python training, my main approach has been to read, organize, and load data using Python before creating visualizations in Tableau, Power BI, or Looker Studio, depending on the client's needs and environment. Most of the time, I've worked with Google tools, but I also have experience with Microsoft Fabric.
 
+AI 🤖🧠
+------
+During the past year working as a freelancer, I decided to explore a new field within the data world: AI. I had always been curious about how the machine learning department at the bank could predict when a customer would receive a product. All I knew was that they were using something called "XGBoost," which, for me, was a black box.
+
+Over the last year and a half, I decided to open this black box, and I must say, it was such a great decision. Since then, I haven’t been able to stop studying and creating my own toy projects to learn more and more about these new technologies. Topics like Machine Learning and Deep Learning, along with all the math and statistics behind them, are finally making sense. It’s amazing to see how powerful and useful these algorithms can be.
+
+In the “Portfolio AI” section of this code, I want to showcase my toy projects and share all the new knowledge I’ve gained.
+
 **Thank you for taking the time to learn about my journey. I'm excited about the opportunities ahead and look forward to contributing my skills and passion to new challenges in the data and AI fields!**

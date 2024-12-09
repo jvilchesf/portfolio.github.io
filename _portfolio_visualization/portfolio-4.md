@@ -1,150 +1,213 @@
 ---
-title: "[Tableau] NYC Real Estate Trends"
-excerpt: "Tableau dashboards to explore New York City's real estate landscape.<br/><img src='https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/main/images/portfolio_viz_4_nyc_dashboard.png' width=300 height=300>"
+title: "[Tableau] Average rent prices in Ireland"
+excerpt: "Dashboard of historical Average Rent Prices Ireland<br/>
+<img src='https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_1_tableau_Ireland.png' width = 300 height = 300 >"
 collection: portfolio
 ---
 
-# Overview
+# Overview  
 
-This project focuses on exploring and visualizing real estate trends in New York City. The ultimate goal is to help building owners, prospective buyers, and other stakeholders understand current market dynamics, regulatory approvals, and construction activities. By leveraging publicly available datasets, we shed light on how economic conditions, city policies, and neighborhood characteristics influence the permitting process and building trends throughout NYC.
+The objective of this project is to create a visualization to compare rent prices in Ireland across different years and regions of the country.  
+The deliverable is a Tableau Dashboard, which has been uploaded to the Tableau Public server.
 
-The target audience includes professionals and residents who live and work in New York City and are interested in real estate trends, data-driven insights, and the evolving landscape of apartment buildings. The content is aimed at individuals who wish to gain a nuanced understanding of the city’s economic health, regulatory environment, and ongoing developmental patterns.
+The country of Ireland, where I lived for two years, was going through a housing crisis, and I wanted to understand how significant this crisis was in terms of rent prices. I also wanted to know the percentage by which prices had increased since COVID.
 
-# Tools and Technologies
+# Tools and technologies
 
-- **Python (pandas, polars)**: Employed for data cleaning, processing, and aggregation of publicly available permit application data.
-- **Tableau**: Used to create an interactive dashboard enabling easy exploration of trends, filtering by borough, year, job type, and other relevant metrics.
-- **Seaborn & Matplotlib**: Utilized for preliminary data exploration and static visualizations during the analysis phase.
+- To approach this project I used:
+    - Python: Using the requests and pandas libraries, I successfully retrieved from a public repository, got geo coordinates and structured the data.
+    - Tableau: Using Tableau I created a dashboard to show the data already structured.
 
-# Outcome
+# Workflow Diagram
 
-Below is a preview of the Tableau dashboard created from the processed dataset. This dashboard enables users to interactively explore NYC real estate trends, filtering by borough, time period, and various building attributes to uncover insights into permit approvals, construction costs, and job types.
+* This diagram is intended to provide an overview of the workflow.
 
-<img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/main/images/portfolio_viz_4_nyc_dashboard.png" alt="NYC Real Estate DOB" width="800" height="1000" >
-
-* Note: The above image is a placeholder. The link to the actual version can be found at the end of this publication.
+<div style="text-align: center;">
+    <img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/Workflow_diagram.png" alt="Workflow Diagram" width="200" height="200">
+</div>
 
 # Dataset Description and Methodology
 
-## Source
+## Source: https://data.cso.ie/ 
+- URL Rent prices: https://data.cso.ie/table/RIA02
+- URL Census: https://data.cso.ie/table/F1001
 
-- **NYC DOB Job Application Filings Dataset**: This dataset includes details on building permit applications, approvals, and related metrics. It provides insights into construction activity, renovations, and regulatory compliance in the city.
-- **Source Link** [here](https://data.cityofnewyork.us/Housing-Development/DOB-Job-Application-Filings/ic3t-wcy2/about_data).
+## Size and Structure  
+### Rent Prices Dataset - 300.000+ rows
 
+| **Column**            | **Description**                                      |
+|------------------------|------------------------------------------------------|
+| STATISTIC Label        | Type of statistic measured (e.g., average rent).     |
+| Year                  | Year of the data.                                    |
+| Number of Bedrooms    | Number of bedrooms in the property.                  |
+| Property Type         | Type of property (e.g., apartment, house).           |
+| Location              | Geographical area of the property.                   |
+| UNIT                  | Unit of measurement (e.g., Euros, square meters).    |
+| VALUE                 | The numerical value of the statistic.                |
 
-## Size and Structure
+### Census Dataset - 200+ rows
 
-- The raw dataset includes thousands of rows detailing permit applications and 96 columns.
-- Key fields include:
-  - **Borough**: Indicates the NYC borough (Manhattan, Brooklyn, Queens, The Bronx, Staten Island).
-  - **Job Type**: Type of job application (e.g., new building, alteration, etc.).
-  - **Job Status**: Current status of the application (Approved, Filed, etc.).
-  - **Approved**: The date when the job application was approved.
-  - **Job #**: Unique identifier for each job application.
-  - **Building Type**: Classification of the building (e.g., Residential, Mixed-use).
-  - **Pre-Filing Date**: The initial date when the application was submitted.
-  - **BUILDING_CLASS**: An NYC Department of Finance classification code.
-  - **GIS_LATITUDE** and **GIS_LONGITUDE**: Geospatial coordinates for mapping.
-  - **Initial Cost**: Estimated initial project cost.
-  - **Fully Paid**: Indicates whether all related fees or payments are settled.
+| **Column**            | **Description**                                      |
+|------------------------|------------------------------------------------------|
+| Statistic Label       | Type of statistic measured (e.g., population).       |
+| CensusYear            | The year the census data was collected.              |
+| County                | The county where the data is associated.             |
+| Sex                   | Gender category (e.g., Male, Female).                |
+| UNIT                  | Unit of measurement (e.g., people, percentage).      |
+| VALUE                 | Numerical value of the statistic.   
+
 
 # Preprocessing: Steps taken to clean, transform, or augment the data.
 
-## 1. Reading and Cleaning Data:  
-   Data was loaded using `polars` and converted to `pandas` for compatibility. We applied schema overrides and handled potential null values.  
-   
-## 2. Datetime Parsing:  
-   The 'Approved' date field was parsed into a proper datetime format to filter by approval year. 
+## 1. Clean Rent Data
+The first step is to format column names, drop unnecessary colums, remove nulls values and group data.
 
-## 3. Year Filtering:  
-   Focused on approvals in 2023 and 2024 to understand recent trends.
+                ```python
+                # Function to clean and process the Rent dataset
+                def CleanDataRent(dfRent):
+                # Rename columns to make them more concise and consistent
+                dfRent = dfRent.rename(columns={
+                    'Number of Bedrooms': 'Number_of_bedrooms',  # Replace spaces with underscores
+                    'Property Type': 'Property_Type',
+                    'VALUE': 'Price'
+                })
 
-## 4. Aggregations:  
-   Grouped data by Borough, Job Type, Job Status, and other dimensions to calculate:
-   - Average GIS coordinates for geospatial patterns.
-   - Summations of the 'Initial Cost' to understand financial trends.
-   
-## 5. Exporting Data:  
-   A consolidated and cleaned CSV output was generated for ingestion into Tableau, ensuring a smooth data-to-dashboard workflow.
+                # Drop unnecessary columns that are not relevant for the analysis
+                dfRent = dfRent.drop(columns=['STATISTIC Label', 'UNIT'])
 
-# Code Example
+                # Define a condition to clean rows with unwanted or null values in the dataset
+                # Remove rows where 'Number_of_bedrooms' or 'Property_Type' contains unwanted values
+                indexDropRentBed = dfRent[
+                    (dfRent['Number_of_bedrooms'] != 'All bedrooms') |  # Exclude "All bedrooms" rows
+                    (dfRent['Property_Type'] != 'All property types')   # Exclude "All property types" rows
+                ].index
 
-Below is a code snippet that illustrates the data cleaning and aggregation process. This code reads the DOB job application filings dataset, filters by the approval years 2023 and 2024, aggregates key metrics, and exports the cleaned dataset as a CSV for Tableau visualization.
+                # Remove rows where 'Price' is empty while other key fields have valid values
+                indexDropRentPrice = dfRent[
+                    (dfRent['Price'] == '') &                              # Empty price
+                    (dfRent['Year'].notnull()) &                          # Valid year
+                    (dfRent['Location'].notnull()) &                      # Valid location
+                    (dfRent['Number_of_bedrooms'] == 'All bedrooms') &    # All bedrooms specified
+                    (dfRent['Property_Type'] == 'All property types')     # All property types specified
+                ].index
 
-        ```python
-        import seaborn as sns
-        import matplotlib.pyplot as plt
-        import pandas as pd
-        import polars as pl
+                # Drop the identified rows from the DataFrame
+                dfRent = dfRent.drop(indexDropRentBed)
+                dfRent = dfRent.drop(indexDropRentPrice)
 
-        # Specify schema overrides if needed
-        schema_overrides = {
-            "Applicant License #": pl.Utf8
-        }
+                # Group the data by 'Number_of_bedrooms' and 'Property_Type', summing up the 'Price' column
+                df_group = dfRent.groupby(['Number_of_bedrooms', 'Property_Type'])['Price'].sum()
 
-        # Read the CSV with polars
-        df = pl.read_csv(
-            '/path/to/DOB_Job_Application_Filings_20241010.csv',
-            schema_overrides=schema_overrides,
-            ignore_errors=True,
-            null_values=["H65055"]
-        )
+                # Return the cleaned Rent DataFrame
+                return dfRent  
 
-        # Convert to pandas for convenience
-        df_pandas = df.to_pandas()
+## 2. Clean Census data:
+Drop unnecessary columns, format column names, and parse the correct data types for each column.
 
-        # Convert 'Approved' column to datetime
-        df_pandas['Date_Approved'] = pd.to_datetime(df_pandas['Approved'], format='%d/%m/%Y', errors='coerce')
+                ```python
+                # Function to clean and process the Census dataset
+                def CleanDataCens(dfCensus):
+                    # Group the dataset by 'UNI' and sum the 'Male' column (example, might be placeholder logic)
+                    df_group = dfCensus.groupby(['UNI'])['Male'].sum()
 
-        # Filter for 2023 and 2024
-        df_filtered = df_pandas[df_pandas['Date_Approved'].dt.year.isin([2023, 2024])]
+                    # Drop unnecessary columns that are not relevant for the analysis
+                    dfCensus = dfCensus.drop(columns=['STATISTIC', 'Statistic', 'TLIST(A1)', 'UNI'])
 
-        if df_filtered.empty:
-            print("The filtered DataFrame is empty. Check the filtering conditions.")
-        else:
-            # Group and aggregate
-            grouped_df = df_filtered.groupby(
-                ['Borough','Job Type','Job Status','Approved','Job #','Building Type','Pre- Filing Date','BUILDING_CLASS','Job Description','Date_Approved','Fully Paid'],
-            ).agg({
-                'GIS_LATITUDE': 'mean',
-                'GIS_LONGITUDE': 'mean',
-                'Initial Cost': 'sum',
-            }).reset_index()
+                    # Rename columns to make them more meaningful and consistent
+                    dfCensus = dfCensus.rename(columns={
+                        'C02779V03348': 'CensusCountyIndex',  # Rename unclear column to a meaningful name
+                        'Male': 'CensusMale',
+                        'Female': 'CensusFemale',
+                        'Both sexes': 'CensusBothSex',
+                        'CensusYear': 'Year'
+                    })
 
-            # Export to CSV for Tableau
-            grouped_df.to_csv('/path/to/job_application_filings_output.csv', index=False)
+                    # Parse the 'CensusBothSex', 'CensusMale', and 'CensusFemale' columns as integers,
+                    # filling null values with 0 before conversion
+                    dfCensus['CensusBothSex'] = dfCensus['CensusBothSex'].fillna(0).astype('int64')
+                    dfCensus['CensusMale'] = dfCensus['CensusMale'].fillna(0).astype('int64')
+                    dfCensus['CensusFemale'] = dfCensus['CensusFemale'].fillna(0).astype('int64')
+
+                    # Group the data by 'Year' and 'County', summing up the 'CensusBothSex' column
+                    censusGroup = dfCensus.groupby(['Year', 'County'])['CensusBothSex'].sum()
+
+                    # Return the cleaned Census DataFrame
+                    return dfCensus
+
+## 3. Data Augmentation
+
+Create a "Location" column based on State/Province and use it to obtain "Latitude" and "Longitude."
+                ```python
+                # Function to add standardized location information and geographic coordinates to the DataFrame
+                def add_location(dfRent):
+                    # Create a new column 'State/Province' initialized with 'Location' values
+                    dfRent['State/Province'] = dfRent['Location']
+                    # Initialize 'cityCountMark' column to store 'City' or 'County' classification
+                    dfRent['cityCountMark'] = ''
+
+                    # Iterate over each row in the DataFrame
+                    for index, row in dfRent.iterrows():
+                        County = row['State/Province']
+                        # If 'State/Province' contains a comma, split and take the second part
+                        if ',' in County:
+                            dfRent.at[index, 'State/Province'] = County.split(',')[1].strip()
+                        else:
+                            # Otherwise, split by space and take the first part
+                            dfRent.at[index, 'State/Province'] = County.split(' ')[0]
+
+                    # Append ' County' to 'State/Province' values
+                    dfRent['State/Province'] = dfRent['State/Province'] + ' County'
+                    # Apply 'cityCountMark' function to classify each location
+                    dfRent['cityCountMark'] = dfRent.apply(cityCountMark, axis=1)
+                    # Update 'Location' field using 'updateLocation' function
+                    dfRent['Location'] = dfRent.apply(updateLocation, axis=1)
+                    # Set 'Country' field to 'Ireland'
+                    dfRent['Country'] = 'Ireland'
+
+                    # Group by 'Location' and sum the 'Price' column
+                    dfRent_location = dfRent.groupby(['Location'])['Price'].sum().reset_index()
+                    # Apply 'get_coordinates' function to retrieve latitude and longitude for each location
+                    dfRent_location['Coordinates'] = dfRent_location['Location'].apply(get_coordinates)
+                    # Split 'Coordinates' into separate 'Latitude' and 'Longitude' columns
+                    dfRent_location[['Latitude', 'Longitude']] = pd.DataFrame(dfRent_location['Coordinates'].tolist(),
+                                                                            index=dfRent_location.index)
+
+                    # Merge the coordinates back into the original DataFrame
+                    dfRent = dfRent.merge(dfRent_location[['Location', 'Coordinates', 'Latitude', 'Longitude']], on='Location',
+                                        how='left')
+
+                    # Return the updated DataFrame
+                    return dfRent  
 
 # Methodology
+    
+## Data Visualization Workflow:
 
-The workflow integrated NYC open data, Python for data processing, and Tableau for visualization. By preparing a clean and structured dataset, we empower interactive dashboards that allow stakeholders to examine trends by borough, time period, building type, and more.
+* I used Tableau to create three main visuals to analyze how rent prices have changed over the years:
+    * A map visualization to filter data by each county in Ireland.  
 
-## Data Visualization Workflow
+    <img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_1_TabeauMap.png" alt="Map" width="500" height="600">
 
-- **Data Preparation**: Python was used for all ETL (Extract, Transform, Load) steps.
-- **Visualization in Tableau**:
-  - **Maps**: Display the geographic distribution of permit approvals was the main approach used for this dasbhoard.
+    * A horizontal bar chart to compare the year-over-year differences in average rent prices.
 
-- Due to confidentiality in certain proprietary datasets, the sample dashboard shown utilizes public data. All personal identifying information (PII) is not included or is masked if required by data privacy regulations.*
+    <img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_1_TabeauHorizontalMap.png" alt="Map" width="500" height="600">
 
-# Challenges and Solutions
+    * A text table to display detailed data for each city within each county.
 
-- **Challenge**: Understanding the underlying dataset and its intricacies—especially dealing with numerous building classes, job types, and borough-level nuances—was time-consuming.
-- **Solution**: Extensive data exploration and communication with the client to clarify data elements and business objectives ensured that the final product matched the user’s needs for actionable insights.
+    <img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_1_TabeauTextTable.png" alt="Map" width="500" height="600">
 
-# Impact
 
-- **Informed Decision-Making**: Stakeholders can quickly identify neighborhood-level trends, understanding where construction is booming or slowing.
-- **Market Insights**: Owners and investors can track construction approvals, costs, and building types to guide strategic decisions.
-- **Time Savings**: Automated data cleaning and preparation pipelines reduce manual work and help clients focus on analysis and interpretation rather than data wrangling.
+# Results and Insights
+*   The graph makes it easy to see that prices began increasing around 2015, not just after COVID, with rising trends observed across all counties.
+*   Most of the largest counties, such as Dublin and those surrounding it, as well as Cork, Limerick, and Galway, have higher prices and show similar behavior.  
 
-# Code Repository
+# Code Repository  
+The code for this project is hosted on GitHub. You can access the repository via the following link:  
 
-The Python script used for processing and aggregation is available on GitHub:  
-[NYC Real Estate Data - Code Repository](https://github.com/jvilchesf/portfolio.github.io/tree/main/_portfolio_scripts/nyc_realstates)
+[Housing Rent Analysis in Ireland - GitHub Repository](https://github.com/jvilchesf/Housing_rent_Ireland/tree/main)  
 
-# Visualization Link
+# Visualizations  
+The interactive Tableau dashboard showcasing the analysis can be accessed below:  
 
-The interactive Tableau dashboard is accessible here:  
-[NYC Real Estate Trends - Tableau Dashboard](https://public.tableau.com/app/profile/jose.miguel.vilches.fierro/viz/Job_application_filling/Dashboard1) 
 
-*It allows users to filter, sort, and drill down into the data to gain insights into the evolving real estate landscape of New York City.*
+[RTB Average Monthly Rent in Ireland - Tableau Dashboard](https://public.tableau.com/app/profile/jose.miguel.vilches.fierro/viz/RTBAverageMonthlyRentIreland/Dasboard_1_test#1)

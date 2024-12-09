@@ -1,213 +1,207 @@
 ---
-title: "[Tableau] Average rent prices in Ireland"
-excerpt: "Dashboard of historical Average Rent Prices Ireland<br/>
-<img src='https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_1_tableau_Ireland.png' width = 300 height = 300 >"
+title: "[Looker Studio]Rate prices telephone company"
+excerpt: "Looker studio dashboard to compare costs of different providers<br/><img src='https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_5_lookerStudio_telephone.png' width = 300 height = 300>"
 collection: portfolio
 ---
 
-# Overview  
+# Overview
 
-The objective of this project is to create a visualization to compare rent prices in Ireland across different years and regions of the country.  
-The deliverable is a Tableau Dashboard, which has been uploaded to the Tableau Public server.
+The objective of this project is to create a visualization to compare costs for different telephone call providers. The dashboard was created with Looker Studio, leveraging Google Colab's development capabilities and BigQuery as a data repository.
 
-The country of Ireland, where I lived for two years, was going through a housing crisis, and I wanted to understand how significant this crisis was in terms of rent prices. I also wanted to know the percentage by which prices had increased since COVID.
+This company provides telephone services to several businesses, with a cost associated with each phone call, whether national or international. It has been challenging for them to track which providers are profitable in specific cases and which ones are too expensive, indicating the need for a different alternative. This is why the dashboard was created.
 
-# Tools and technologies
+# Tools and Technologies  
 
-- To approach this project I used:
-    - Python: Using the requests and pandas libraries, I successfully retrieved from a public repository, got geo coordinates and structured the data.
-    - Tableau: Using Tableau I created a dashboard to show the data already structured.
+- To approach this project I used: 
+    -   Python: Using the pandas, PostgreSQL, and BigQuery libraries, I successfully retrieved data from PostgreSQL and structured it.
+    -   BigQuery: I used BigQuery as a data repository because it allowed me to connect Looker Studio easily for handling large amounts of data.
+    -   Looker Studio: I used Looker Studio to create a dashboard that displays the structured data and generates the KPIs to be shown.
 
 # Workflow Diagram
 
-* This diagram is intended to provide an overview of the workflow.
+- This diagram is intended to provide an overview of the workflow.
+
+    - Connect to a MySQL database via a Python script.
+    - There are two Python scripts with different goals: one updates the table in BigQuery daily, and the other runs on demand with daily data.
+    - BigQuery is the data repository where the final structured data, sent from Python, will be saved.
+    - Looker Studio is the final layer where the dashboard is displayed.
 
 <div style="text-align: center;">
-    <img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/Workflow_diagram.png" alt="Workflow Diagram" width="200" height="200">
+    <img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_5_workflow.png" alt="Workflow Diagram" width="400" height="400">
 </div>
 
-# Dataset Description and Methodology
+# Outcome
 
-## Source: https://data.cso.ie/ 
-- URL Rent prices: https://data.cso.ie/table/RIA02
-- URL Census: https://data.cso.ie/table/F1001
+The final Looker Studio dashboard offers users an intuitive, interactive platform to explore pricing differences, track trends over time, and gain insights into their call provider costs. By leveraging the processed dataset, the dashboard allows for dynamic filtering and clear visual comparisons, empowering decision-makers to quickly identify the most cost-effective options.
 
-## Size and Structure  
-### Rent Prices Dataset - 300.000+ rows
+<img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/porfolio_viz_5_telephone_dashboard.png" alt="Telephone Dashboard Preview" width="600" height="600" >
 
-| **Column**            | **Description**                                      |
-|------------------------|------------------------------------------------------|
-| STATISTIC Label        | Type of statistic measured (e.g., average rent).     |
-| Year                  | Year of the data.                                    |
-| Number of Bedrooms    | Number of bedrooms in the property.                  |
-| Property Type         | Type of property (e.g., apartment, house).           |
-| Location              | Geographical area of the property.                   |
-| UNIT                  | Unit of measurement (e.g., Euros, square meters).    |
-| VALUE                 | The numerical value of the statistic.                |
+*Note: The above image is a placeholder. A link to the live dashboard is provided at the end of this publication.*
 
-### Census Dataset - 200+ rows
+**Script Delivery:**  
+All relevant scripts were delivered to the client in a structured zip file for installation on their Linux server. This package includes:
 
-| **Column**            | **Description**                                      |
-|------------------------|------------------------------------------------------|
-| Statistic Label       | Type of statistic measured (e.g., population).       |
-| CensusYear            | The year the census data was collected.              |
-| County                | The county where the data is associated.             |
-| Sex                   | Gender category (e.g., Male, Female).                |
-| UNIT                  | Unit of measurement (e.g., people, percentage).      |
-| VALUE                 | Numerical value of the statistic.   
+- **README.md:** Guidance on setup and usage.  
+- **requirements.txt:** List of Python dependencies for easy environment setup.  
+- **telecom_adhoc.py:** The main Python script to extract, transform, and load the data.
+
+# Dataset Description and Methodology  
+
+## Source
+
+- The data sources is a MySql data base with an specific table with call with ~21.000.000. 
+
+| Field Name        | Type     | Description                                |
+|-------------------|----------|--------------------------------------------|
+| id                | INTEGER  | Unique identifier for each record         |
+| DateTime          | DATETIME | Timestamp of the call                     |
+| Origin            | INTEGER  | ID of the origin location (e.g., caller)  |
+| Destination       | INTEGER  | ID of the destination location (e.g., receiver) |
+| Seconds           | INTEGER  | Duration of the call in seconds           |
+| DirectionForwarded| INTEGER  | Indicates if the call was forwarded       |
+| Cost              | FLOAT    | Cost of the call                          |
+| Sell              | FLOAT    | Selling price of the call                 |
+| Profit            | FLOAT    | Profit generated from the call            |
+| CallType          | INTEGER  | Type of the call (e.g., local, international) |
+| CustIdent         | INTEGER  | Customer identifier                       |
+| customername      | STRING   | Name of the customer                      |
+| acc_num           | STRING   | Account number associated with the customer |
+| description_name  | STRING   | Description of the call or service        |
+| carrier_name      | STRING   | Name of the carrier/provider              |
+| minutes           | FLOAT    | Duration of the call in minutes           |
 
 
 # Preprocessing: Steps taken to clean, transform, or augment the data.
 
-## 1. Clean Rent Data
-The first step is to format column names, drop unnecessary colums, remove nulls values and group data.
+The preprocessing phase involves several steps designed to clean, transform, and augment the source data before loading it into BigQuery.
 
-                ```python
-                # Function to clean and process the Rent dataset
-                def CleanDataRent(dfRent):
-                # Rename columns to make them more concise and consistent
-                dfRent = dfRent.rename(columns={
-                    'Number of Bedrooms': 'Number_of_bedrooms',  # Replace spaces with underscores
-                    'Property Type': 'Property_Type',
-                    'VALUE': 'Price'
-                })
+## 1. Data Retrieval
 
-                # Drop unnecessary columns that are not relevant for the analysis
-                dfRent = dfRent.drop(columns=['STATISTIC Label', 'UNIT'])
+**Description:**  
+Fetch the most recent `DateTime` from the target BigQuery table and use it to query a MySQL database for new records. This ensures that only data newer than the recorded `DateTime` is retrieved.
 
-                # Define a condition to clean rows with unwanted or null values in the dataset
-                # Remove rows where 'Number_of_bedrooms' or 'Property_Type' contains unwanted values
-                indexDropRentBed = dfRent[
-                    (dfRent['Number_of_bedrooms'] != 'All bedrooms') |  # Exclude "All bedrooms" rows
-                    (dfRent['Property_Type'] != 'All property types')   # Exclude "All property types" rows
-                ].index
+**Code Snippet:**
 
-                # Remove rows where 'Price' is empty while other key fields have valid values
-                indexDropRentPrice = dfRent[
-                    (dfRent['Price'] == '') &                              # Empty price
-                    (dfRent['Year'].notnull()) &                          # Valid year
-                    (dfRent['Location'].notnull()) &                      # Valid location
-                    (dfRent['Number_of_bedrooms'] == 'All bedrooms') &    # All bedrooms specified
-                    (dfRent['Property_Type'] == 'All property types')     # All property types specified
-                ].index
+    ```python
+    query = """
+        SELECT MAX(DateTime) AS max_datetime
+        FROM `cdr-data.telecom_rates.telecom_calls`
+    """
+    query_job = client.query(query)
+    result = query_job.result()
 
-                # Drop the identified rows from the DataFrame
-                dfRent = dfRent.drop(indexDropRentBed)
-                dfRent = dfRent.drop(indexDropRentPrice)
+    max_datetime = None
+    for row in result:
+        max_datetime = row.max_datetime
 
-                # Group the data by 'Number_of_bedrooms' and 'Property_Type', summing up the 'Price' column
-                df_group = dfRent.groupby(['Number_of_bedrooms', 'Property_Type'])['Price'].sum()
+    print("Max DateTime retrieved:", max_datetime)
 
-                # Return the cleaned Rent DataFrame
-                return dfRent  
+## 2. Data Integration
 
-## 2. Clean Census data:
-Drop unnecessary columns, format column names, and parse the correct data types for each column.
+**Description:**  
+Load multiple related tables (e.g., descriptions, carriers, customers) from MySQL and merge them into a single main table. This process involves joining datasets on common keys, ensuring a comprehensive dataset is prepared for analysis.
 
-                ```python
-                # Function to clean and process the Census dataset
-                def CleanDataCens(dfCensus):
-                    # Group the dataset by 'UNI' and sum the 'Male' column (example, might be placeholder logic)
-                    df_group = dfCensus.groupby(['UNI'])['Male'].sum()
+**Code Snippet:**
 
-                    # Drop unnecessary columns that are not relevant for the analysis
-                    dfCensus = dfCensus.drop(columns=['STATISTIC', 'Statistic', 'TLIST(A1)', 'UNI'])
+    # Merging multiple DataFrames into one main table
+    main_table = df_data_type.merge(df_customer_name, how='left', left_on='CustomerName', right_on='customer_name_id')
+    main_table = main_table.merge(df_customer, how='left', left_on='Customer', right_on='customer_id')
+    main_table = main_table.merge(df_description, how='left', left_on='Description', right_on='description_id')
+    main_table = main_table.merge(df_carrier, how='left', left_on='Carrier', right_on='carrier_id')
 
-                    # Rename columns to make them more meaningful and consistent
-                    dfCensus = dfCensus.rename(columns={
-                        'C02779V03348': 'CensusCountyIndex',  # Rename unclear column to a meaningful name
-                        'Male': 'CensusMale',
-                        'Female': 'CensusFemale',
-                        'Both sexes': 'CensusBothSex',
-                        'CensusYear': 'Year'
-                    })
+### 3. Data Cleaning & Restructuring
 
-                    # Parse the 'CensusBothSex', 'CensusMale', and 'CensusFemale' columns as integers,
-                    # filling null values with 0 before conversion
-                    dfCensus['CensusBothSex'] = dfCensus['CensusBothSex'].fillna(0).astype('int64')
-                    dfCensus['CensusMale'] = dfCensus['CensusMale'].fillna(0).astype('int64')
-                    dfCensus['CensusFemale'] = dfCensus['CensusFemale'].fillna(0).astype('int64')
+**Description:**
+Rename columns for clarity, remove unnecessary fields, and convert columns (such as DateTime) to their proper data types. This step ensures that the data is clean, consistent, and ready for further transformation.
 
-                    # Group the data by 'Year' and 'County', summing up the 'CensusBothSex' column
-                    censusGroup = dfCensus.groupby(['Year', 'County'])['CensusBothSex'].sum()
+**Code Snippet:**
 
-                    # Return the cleaned Census DataFrame
-                    return dfCensus
+    # Rename columns for clarity
+    df_description.rename(columns={'id': 'description_id', 'Name': 'description_name'}, inplace=True)
 
-## 3. Data Augmentation
+    # Remove columns that are no longer needed
+    columns_to_delete = ['CustomerName', 'Customer', 'customer_name_id', 'customer_id',
+                        'description_id', 'carrier_id', 'User', 'Carrier', 'AccNum', 'Description']
+    main_table.drop(columns=columns_to_delete, inplace=True)
 
-Create a "Location" column based on State/Province and use it to obtain "Latitude" and "Longitude."
-                ```python
-                # Function to add standardized location information and geographic coordinates to the DataFrame
-                def add_location(dfRent):
-                    # Create a new column 'State/Province' initialized with 'Location' values
-                    dfRent['State/Province'] = dfRent['Location']
-                    # Initialize 'cityCountMark' column to store 'City' or 'County' classification
-                    dfRent['cityCountMark'] = ''
+    # Convert DateTime to proper format
+    main_table['DateTime'] = pd.to_datetime(main_table['DateTime'], errors='coerce')
 
-                    # Iterate over each row in the DataFrame
-                    for index, row in dfRent.iterrows():
-                        County = row['State/Province']
-                        # If 'State/Province' contains a comma, split and take the second part
-                        if ',' in County:
-                            dfRent.at[index, 'State/Province'] = County.split(',')[1].strip()
-                        else:
-                            # Otherwise, split by space and take the first part
-                            dfRent.at[index, 'State/Province'] = County.split(' ')[0]
+### 4. Data Transformation & Enhancement
 
-                    # Append ' County' to 'State/Province' values
-                    dfRent['State/Province'] = dfRent['State/Province'] + ' County'
-                    # Apply 'cityCountMark' function to classify each location
-                    dfRent['cityCountMark'] = dfRent.apply(cityCountMark, axis=1)
-                    # Update 'Location' field using 'updateLocation' function
-                    dfRent['Location'] = dfRent.apply(updateLocation, axis=1)
-                    # Set 'Country' field to 'Ireland'
-                    dfRent['Country'] = 'Ireland'
+**Description:**
+Adjust numerical values to appropriate scales and create new derived features. For instance, scale Cost, Profit, and Sell values for easier interpretation, and create a minutes column from Seconds to provide more intuitive time metrics.
 
-                    # Group by 'Location' and sum the 'Price' column
-                    dfRent_location = dfRent.groupby(['Location'])['Price'].sum().reset_index()
-                    # Apply 'get_coordinates' function to retrieve latitude and longitude for each location
-                    dfRent_location['Coordinates'] = dfRent_location['Location'].apply(get_coordinates)
-                    # Split 'Coordinates' into separate 'Latitude' and 'Longitude' columns
-                    dfRent_location[['Latitude', 'Longitude']] = pd.DataFrame(dfRent_location['Coordinates'].tolist(),
-                                                                            index=dfRent_location.index)
+**Code Snippet:**
 
-                    # Merge the coordinates back into the original DataFrame
-                    dfRent = dfRent.merge(dfRent_location[['Location', 'Coordinates', 'Latitude', 'Longitude']], on='Location',
-                                        how='left')
+    # Adjust numerical values
+    main_table['Cost'] = main_table['Cost'] / 10000
+    main_table['Profit'] = main_table['Profit'] / 100000
+    main_table['Sell'] = main_table['Sell'] / 10000
 
-                    # Return the updated DataFrame
-                    return dfRent  
+    # Create a new 'minutes' column from 'Seconds'
+    main_table['minutes'] = main_table['Seconds'] / 60
+
+    print("Data transformation and enhancement completed.")
+
+### 5. Data Loading into BigQuery
+
+**Description:**  
+The final step in the preprocessing pipeline involves appending the processed and enhanced data to an existing BigQuery table. Rather than replacing the existing dataset, the new rows are added to the current table, ensuring that historical data is preserved. The schema is automatically detected, making the process straightforward and flexible.
+
+**Code Snippet:**
+
+    ```python
+    table_ref = f"{project}.{dataset_id}.{table_id}"
+    job_config = bigquery.LoadJobConfig(
+        write_disposition=bigquery.WriteDisposition.WRITE_APPEND,
+        autodetect=True
+    )
+
+    job = client.load_table_from_dataframe(main_table, table_ref, job_config=job_config)
+    job.result()  # Wait for the load job to complete
+
+    print(f"Appended {job.output_rows} rows to {dataset_id}:{table_id}.")
+
 
 # Methodology
+
+The development of this dashboard followed an iterative, user-centered methodology, ensuring that the final product aligned closely with the customer’s needs. The process involved several key steps:
+
+1. **Initial Consultation & Requirements Gathering:**  
+   Early meetings with the client were conducted to understand their business objectives, data sources, and key performance indicators (KPIs). During these sessions, we identified essential metrics like the number of calls, costs, profits, and sell values.
+
+2. **Data Exploration & Cleaning:**  
+   Using Python and SQL, the source data was extracted, cleansed, and standardized. This included removing unnecessary columns, adjusting time formats, and creating meaningful derived metrics. The customer’s input at this stage was crucial to verify data quality and ensure that the chosen metrics accurately reflected real-world scenarios.
+
+3. **Iterative Dashboard Design & Feedback Loops:**  
+   The initial dashboard layout was developed in Looker Studio, focusing on clarity, usability, and relevance of the displayed data. Regular feedback sessions with the client allowed for adjustments to visual elements, color schemes, and data groupings. These iterative reviews ensured that the dashboard’s filters, charts, and summary cards effectively highlighted the key insights the customer needed.
+
+4. **Refinement of KPIs & Visualization Techniques:**  
+   As the project progressed, ongoing discussions helped refine the KPIs further. We experimented with different chart types, date ranges, and comparison periods. The client provided continuous feedback on what best represented their operational reality, leading to a more intuitive and actionable final design.
+
+5. **Validation & Final Review:**  
+   Before deployment, the dashboard underwent a final round of validation meetings. The client confirmed that the metrics aligned with their internal records and that the visualizations supported strategic decision-making. Any last-minute changes, such as adding new filters or adjusting the labeling of certain KPIs, were incorporated to finalize the solution.
+
+**In essence, the methodology centered on close collaboration and frequent check-ins with the customer, ensuring that every stage—from data preparation to visual design—was informed by their feedback and aligned with their business goals.**
+
     
-## Data Visualization Workflow:
 
-* I used Tableau to create three main visuals to analyze how rent prices have changed over the years:
-    * A map visualization to filter data by each county in Ireland.  
+# Data Visualization Workflow
 
-    <img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_1_TabeauMap.png" alt="Map" width="500" height="600">
-
-    * A horizontal bar chart to compare the year-over-year differences in average rent prices.
-
-    <img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_1_TabeauHorizontalMap.png" alt="Map" width="500" height="600">
-
-    * A text table to display detailed data for each city within each county.
-
-    <img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_1_TabeauTextTable.png" alt="Map" width="500" height="600">
-
+The visualization process began with identifying the client’s target KPIs and data sources. After data extraction and cleaning, metrics were carefully chosen to reflect business insights. These metrics were then visualized in Looker Studio, with each round of feedback guiding adjustments in chart types, filtering mechanisms, and layout. The workflow was iterative, with continuous client involvement ensuring that the final product effectively communicated the necessary insights.
 
 # Results and Insights
-*   The graph makes it easy to see that prices began increasing around 2015, not just after COVID, with rising trends observed across all counties.
-*   Most of the largest counties, such as Dublin and those surrounding it, as well as Cork, Limerick, and Galway, have higher prices and show similar behavior.  
 
-# Code Repository  
-The code for this project is hosted on GitHub. You can access the repository via the following link:  
+The final dashboard presents a clear comparison of different telephone call providers, highlighting trends in cost, profit, and call duration. Users can quickly identify which providers offer the best value and under what circumstances. This clarity helps stakeholders make informed decisions about switching providers, optimizing call routes, or negotiating better rates.
 
-[Housing Rent Analysis in Ireland - GitHub Repository](https://github.com/jvilchesf/Housing_rent_Ireland/tree/main)  
+# Code Repository
 
-# Visualizations  
-The interactive Tableau dashboard showcasing the analysis can be accessed below:  
+The Python script used for processing and aggregation is available on GitHub:  
+[Telephone company - Code Repository](https://github.com/jvilchesf/portfolio.github.io/tree/main/_portfolio_scripts/telephone_rate_prices)
 
+# Visualization Link
 
-[RTB Average Monthly Rent in Ireland - Tableau Dashboard](https://public.tableau.com/app/profile/jose.miguel.vilches.fierro/viz/RTBAverageMonthlyRentIreland/Dasboard_1_test#1)
+The interactive Looker studio dashboard is accessible here:  
+[Telephone company - Looker Studio Dashboard](https://lookerstudio.google.com/u/0/reporting/2010797f-edec-4608-8f4d-f8949c0a6c70/page/nO1HE/edit) 
+
