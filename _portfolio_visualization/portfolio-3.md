@@ -1,132 +1,213 @@
 ---
-title: "[Looker Studio] Sales Dashboard"
-excerpt: "An interactive dashboard for tracking daily subscription sales<br/><img src='https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_3_lookerStudio_Uprofit.png' width=300 height=300>"
+title: "[Tableau] Average rent prices in Ireland"
+excerpt: "Dashboard of historical Average Rent Prices Ireland<br/>
+<img src='https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_1_tableau_Ireland.png' width = 300 height = 300 >"
 collection: portfolio
 ---
 
-# Overview
+# Overview  
 
-This project involved integrating multiple technologies to create a unified solution for tracking and analyzing sales data. The client, a subscription-based company, transitioned from using Facebook Pixel and Google Analytics to leveraging **Google Cloud Platform (GCP)**, including **GA4** and **Google Tag Manager (GTM)**, for enhanced sales tracking.
+The objective of this project is to create a visualization to compare rent prices in Ireland across different years and regions of the country.  
+The deliverable is a Tableau Dashboard, which has been uploaded to the Tableau Public server.
 
-# Problem Statement
+The country of Ireland, where I lived for two years, was going through a housing crisis, and I wanted to understand how significant this crisis was in terms of rent prices. I also wanted to know the percentage by which prices had increased since COVID.
 
-While the existing setup tracked daily sales effectively, it lacked visibility into monthly subscription renewals. Additionally, new data sources from **Supabase** and **Google Sheets** introduced the challenge of consolidating diverse datasets into a single, comprehensive view. This required building a unified solution to track sales performance across multiple channels.
+# Tools and technologies
 
-# Solution
-
-The deliverable was an **interactive Looker Studio dashboard**, updated daily, consolidating data from:
-- **GA4 (via GTM)**: For tracking daily sales and user interactions.
-- **Supabase**: For subscription renewals.
-- **Google Sheets**: For additional revenue streams.
-- **Stripe**: For matching the numbers 
-
-
----
-
-# Tools and Technologies
-
-The following tools and technologies were utilized to streamline data integration, processing, and visualization:
-
-- **Python (Google Cloud Functions)**: For data extraction, cleaning, and loading from multiple sources (Supabase, Stripe, Google Sheets, GA4).
-- **SQL (BigQuery)**: To structure, transform, and aggregate data from all sources into a single view.
-- **Google Tag Manager (GTM)**: For tracking user interactions and automating analytics implementation.
-- **Google Analytics 4 (GA4)**: For capturing customer behavior and tracking key metrics.
-- **Looker Studio**: For creating dynamic dashboards with real-time updates.
-
-
-# Outcome
-
-The dashboard provided the client with:
-- **Centralized Insights**: A unified view of sales performance across all channels.
-- **Enhanced Decision-Making**: Real-time monitoring of daily and monthly sales trends.
-- **Campaign Effectiveness**: Insights into high-performing social media campaigns.
-
-**Access the dashboard** [here](https://lookerstudio.google.com/u/0/reporting/cdc372da-515a-4510-9c68-ed8da67b1d63/page/p_13p464yedd).
-
-<div style="text-align: center;">  
-    <img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_3_dashboard.png" alt="Sales Dashboard" width="600" height="600">
-</div>
+- To approach this project I used:
+    - Python: Using the requests and pandas libraries, I successfully retrieved from a public repository, got geo coordinates and structured the data.
+    - Tableau: Using Tableau I created a dashboard to show the data already structured.
 
 # Workflow Diagram
 
-<div style="text-align: center;">
-    <img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_3_workflow_.png" alt="Workflow Diagram" width="600" height="600">
-</div>
+* This diagram is intended to provide an overview of the workflow.
 
----
+<div style="text-align: center;">
+    <img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/Workflow_diagram.png" alt="Workflow Diagram" width="200" height="200">
+</div>
 
 # Dataset Description and Methodology
 
-This project integrated data from four key sources:
+## Source: https://data.cso.ie/ 
+- URL Rent prices: https://data.cso.ie/table/RIA02
+- URL Census: https://data.cso.ie/table/F1001
 
-## 1. Supabase Sales Data
-- **Records**: 5,072,138
-- **Fields**: `payment_id`, `payment_amount`, `payment_date`, `subscription_id`, `checkout_status`
-- **Purpose**: Tracks payments, subscriptions, and user activity.
+## Size and Structure  
+### Rent Prices Dataset - 300.000+ rows
 
-## 2. Stripe Sales Data
-- **Records**: 279,895
-- **Fields**: `id`, `amount`, `fee`, `customer_email`, `currency`
-- **Purpose**: Captures Stripe transaction details, including fees and customer information.
+| **Column**            | **Description**                                      |
+|------------------------|------------------------------------------------------|
+| STATISTIC Label        | Type of statistic measured (e.g., average rent).     |
+| Year                  | Year of the data.                                    |
+| Number of Bedrooms    | Number of bedrooms in the property.                  |
+| Property Type         | Type of property (e.g., apartment, house).           |
+| Location              | Geographical area of the property.                   |
+| UNIT                  | Unit of measurement (e.g., Euros, square meters).    |
+| VALUE                 | The numerical value of the statistic.                |
 
-## 3. Live Accounts Data (Google Sheets)
-- **Records**: 38,573
-- **Fields**: `FULL_NAME`, `BALANCE`, `COUNTRY`, `TX_STRIPE_ID`
-- **Purpose**: Provides user account information, including demographics and financial data.
+### Census Dataset - 200+ rows
 
-## 4. GA4 Event Data
-- **Records**: 13,497,845
-- **Fields**: `event_name`, `event_params`, `user_id`, `platform`
-- **Purpose**: Tracks user interactions, app behavior, and traffic sources.
+| **Column**            | **Description**                                      |
+|------------------------|------------------------------------------------------|
+| Statistic Label       | Type of statistic measured (e.g., population).       |
+| CensusYear            | The year the census data was collected.              |
+| County                | The county where the data is associated.             |
+| Sex                   | Gender category (e.g., Male, Female).                |
+| UNIT                  | Unit of measurement (e.g., people, percentage).      |
+| VALUE                 | Numerical value of the statistic.   
 
----
 
-## Results and Insights
+# Preprocessing: Steps taken to clean, transform, or augment the data.
 
-### Key Findings:
-1. **Sales Trends**: The line graph highlighted daily sales patterns, showing peak periods and seasonal trends.
-2. **Payment Insights**: The majority of payments were processed via **Stripe (80.4%)**, with additional insights into alternative payment methods.
-3. **Revenue Distribution**: Country and product-type breakdowns revealed key revenue sources.
-4. **Campaign Effectiveness**: Analysis of sales sources (e.g., direct traffic, organic search) enabled better resource allocation.
+## 1. Clean Rent Data
+The first step is to format column names, drop unnecessary colums, remove nulls values and group data.
 
-### Implications:
-- Streamlined sales tracking across multiple channels.
-- Data-driven decisions to optimize campaigns and revenue streams.
-- Reduced manual effort by automating data integration and reporting.
+                ```python
+                # Function to clean and process the Rent dataset
+                def CleanDataRent(dfRent):
+                # Rename columns to make them more concise and consistent
+                dfRent = dfRent.rename(columns={
+                    'Number of Bedrooms': 'Number_of_bedrooms',  # Replace spaces with underscores
+                    'Property Type': 'Property_Type',
+                    'VALUE': 'Price'
+                })
 
----
+                # Drop unnecessary columns that are not relevant for the analysis
+                dfRent = dfRent.drop(columns=['STATISTIC Label', 'UNIT'])
 
-## Impact
+                # Define a condition to clean rows with unwanted or null values in the dataset
+                # Remove rows where 'Number_of_bedrooms' or 'Property_Type' contains unwanted values
+                indexDropRentBed = dfRent[
+                    (dfRent['Number_of_bedrooms'] != 'All bedrooms') |  # Exclude "All bedrooms" rows
+                    (dfRent['Property_Type'] != 'All property types')   # Exclude "All property types" rows
+                ].index
 
-- **Efficiency Gains**: Automated data refresh reduced manual processing by **90%**.
-- **Streamlined Tracking**: Centralized sales performance metrics saved time and improved responsiveness.
+                # Remove rows where 'Price' is empty while other key fields have valid values
+                indexDropRentPrice = dfRent[
+                    (dfRent['Price'] == '') &                              # Empty price
+                    (dfRent['Year'].notnull()) &                          # Valid year
+                    (dfRent['Location'].notnull()) &                      # Valid location
+                    (dfRent['Number_of_bedrooms'] == 'All bedrooms') &    # All bedrooms specified
+                    (dfRent['Property_Type'] == 'All property types')     # All property types specified
+                ].index
 
----
+                # Drop the identified rows from the DataFrame
+                dfRent = dfRent.drop(indexDropRentBed)
+                dfRent = dfRent.drop(indexDropRentPrice)
 
-## Code Repository
+                # Group the data by 'Number_of_bedrooms' and 'Property_Type', summing up the 'Price' column
+                df_group = dfRent.groupby(['Number_of_bedrooms', 'Property_Type'])['Price'].sum()
 
-Access the full repository [here](https://github.com/jvilchesf/portfolio.github.io/tree/main/_portfolio_scripts/sales_dashboard).
+                # Return the cleaned Rent DataFrame
+                return dfRent  
 
-### Key Scripts:
-- **Supabase**:
-  - `get_data_supabase_db.sql`: Creates and refreshes sales data in Supabase.
-  - `get_data_supabase.py`: Extracts data from Supabase into BigQuery.
-- **Stripe**:
-  - `get_data_stripe.py`: Pulls data from Stripe via API.
-  - `transform_data_bq_stripe.sql`: Structures Stripe data in BigQuery.
-- **Google Sheets**:
-  - `get_data_csv_liveaccounts.py`: Pulls live account data into BigQuery.
-- **GA4 Integration**:
-  - `transform_data_bq_dashboard.sql`: Merges data from all sources every 15 minutes.
+## 2. Clean Census data:
+Drop unnecessary columns, format column names, and parse the correct data types for each column.
 
----
+                ```python
+                # Function to clean and process the Census dataset
+                def CleanDataCens(dfCensus):
+                    # Group the dataset by 'UNI' and sum the 'Male' column (example, might be placeholder logic)
+                    df_group = dfCensus.groupby(['UNI'])['Male'].sum()
 
-## Workflow Integration
+                    # Drop unnecessary columns that are not relevant for the analysis
+                    dfCensus = dfCensus.drop(columns=['STATISTIC', 'Statistic', 'TLIST(A1)', 'UNI'])
 
-### How the Scripts Work Together:
-1. **Supabase**: Data is refreshed via SQL (`get_data_supabase_db.sql`) and pulled into BigQuery with Python (`get_data_supabase.py`).
-2. **Stripe**: API data is pulled with Python (`get_data_stripe.py`) and structured in BigQuery (`transform_data_bq_stripe.sql`).
-3. **Google Sheets**: Data is extracted and loaded into BigQuery (`get_data_csv_liveaccounts.py`).
-4. **GA4**: Event data is merged with other sources using a BigQuery script (`transform_data_bq_dashboard.sql`).
+                    # Rename columns to make them more meaningful and consistent
+                    dfCensus = dfCensus.rename(columns={
+                        'C02779V03348': 'CensusCountyIndex',  # Rename unclear column to a meaningful name
+                        'Male': 'CensusMale',
+                        'Female': 'CensusFemale',
+                        'Both sexes': 'CensusBothSex',
+                        'CensusYear': 'Year'
+                    })
 
-The final merged table feeds directly into Looker Studio, providing real-time, actionable insights for stakeholders.
+                    # Parse the 'CensusBothSex', 'CensusMale', and 'CensusFemale' columns as integers,
+                    # filling null values with 0 before conversion
+                    dfCensus['CensusBothSex'] = dfCensus['CensusBothSex'].fillna(0).astype('int64')
+                    dfCensus['CensusMale'] = dfCensus['CensusMale'].fillna(0).astype('int64')
+                    dfCensus['CensusFemale'] = dfCensus['CensusFemale'].fillna(0).astype('int64')
+
+                    # Group the data by 'Year' and 'County', summing up the 'CensusBothSex' column
+                    censusGroup = dfCensus.groupby(['Year', 'County'])['CensusBothSex'].sum()
+
+                    # Return the cleaned Census DataFrame
+                    return dfCensus
+
+## 3. Data Augmentation
+
+Create a "Location" column based on State/Province and use it to obtain "Latitude" and "Longitude."
+                ```python
+                # Function to add standardized location information and geographic coordinates to the DataFrame
+                def add_location(dfRent):
+                    # Create a new column 'State/Province' initialized with 'Location' values
+                    dfRent['State/Province'] = dfRent['Location']
+                    # Initialize 'cityCountMark' column to store 'City' or 'County' classification
+                    dfRent['cityCountMark'] = ''
+
+                    # Iterate over each row in the DataFrame
+                    for index, row in dfRent.iterrows():
+                        County = row['State/Province']
+                        # If 'State/Province' contains a comma, split and take the second part
+                        if ',' in County:
+                            dfRent.at[index, 'State/Province'] = County.split(',')[1].strip()
+                        else:
+                            # Otherwise, split by space and take the first part
+                            dfRent.at[index, 'State/Province'] = County.split(' ')[0]
+
+                    # Append ' County' to 'State/Province' values
+                    dfRent['State/Province'] = dfRent['State/Province'] + ' County'
+                    # Apply 'cityCountMark' function to classify each location
+                    dfRent['cityCountMark'] = dfRent.apply(cityCountMark, axis=1)
+                    # Update 'Location' field using 'updateLocation' function
+                    dfRent['Location'] = dfRent.apply(updateLocation, axis=1)
+                    # Set 'Country' field to 'Ireland'
+                    dfRent['Country'] = 'Ireland'
+
+                    # Group by 'Location' and sum the 'Price' column
+                    dfRent_location = dfRent.groupby(['Location'])['Price'].sum().reset_index()
+                    # Apply 'get_coordinates' function to retrieve latitude and longitude for each location
+                    dfRent_location['Coordinates'] = dfRent_location['Location'].apply(get_coordinates)
+                    # Split 'Coordinates' into separate 'Latitude' and 'Longitude' columns
+                    dfRent_location[['Latitude', 'Longitude']] = pd.DataFrame(dfRent_location['Coordinates'].tolist(),
+                                                                            index=dfRent_location.index)
+
+                    # Merge the coordinates back into the original DataFrame
+                    dfRent = dfRent.merge(dfRent_location[['Location', 'Coordinates', 'Latitude', 'Longitude']], on='Location',
+                                        how='left')
+
+                    # Return the updated DataFrame
+                    return dfRent  
+
+# Methodology
+    
+## Data Visualization Workflow:
+
+* I used Tableau to create three main visuals to analyze how rent prices have changed over the years:
+    * A map visualization to filter data by each county in Ireland.  
+
+    <img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_1_TabeauMap.png" alt="Map" width="500" height="600">
+
+    * A horizontal bar chart to compare the year-over-year differences in average rent prices.
+
+    <img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_1_TabeauHorizontalMap.png" alt="Map" width="500" height="600">
+
+    * A text table to display detailed data for each city within each county.
+
+    <img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_viz_1_TabeauTextTable.png" alt="Map" width="500" height="600">
+
+
+# Results and Insights
+*   The graph makes it easy to see that prices began increasing around 2015, not just after COVID, with rising trends observed across all counties.
+*   Most of the largest counties, such as Dublin and those surrounding it, as well as Cork, Limerick, and Galway, have higher prices and show similar behavior.  
+
+# Code Repository  
+The code for this project is hosted on GitHub. You can access the repository via the following link:  
+
+[Housing Rent Analysis in Ireland - GitHub Repository](https://github.com/jvilchesf/Housing_rent_Ireland/tree/main)  
+
+# Visualizations  
+The interactive Tableau dashboard showcasing the analysis can be accessed below:  
+
+
+[RTB Average Monthly Rent in Ireland - Tableau Dashboard](https://public.tableau.com/app/profile/jose.miguel.vilches.fierro/viz/RTBAverageMonthlyRentIreland/Dasboard_1_test#1)
