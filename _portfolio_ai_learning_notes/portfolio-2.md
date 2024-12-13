@@ -6,7 +6,7 @@ collection: portfolio
 
 # Overview
 
-This text continues the topic of backpropagation from the last post. The main idea here is to add new functionalities to the class 'value' that will allow me to use other mathematical expressions like division, subtraction, exponentiation, and others, and of course, functionalities to backpropagate through them in the graph shown in "Manual Back Propagation [link](/portfolio/portfolio-7)."
+This text continues the topic of backpropagation from the last post. The main idea here is to add new functionalities to the class 'value' that will allow me to use other mathematical expressions like division, subtraction, exponentiation, and others, and of course, functionalities to backpropagate through them in the graph shown in "Manual Back Propagation [link](/portfolio_ai_learning_notes/portfolio-1)."
 
 Additionally, I will use the "value" class to create a basic neural network with some hidden layers to optimize a loss function as an example.
 
@@ -16,7 +16,7 @@ To execute automatic backpropagation, it is necessary to add a backpropagation f
 
 For example, an easy one to explain is addition. Each time I perform an addition as part of the neural network math process, I can calculate the gradient for the current operation based on the chain rule: `global derivative * local derivative`.
 
-When I execute 2 + 2, what is really happening is `2.__add__(2)`. Then, what is received by the `__add__` function below is self (2) and other (2). First, out is defined as the primary goal of this function, which is to add these two numbers. Afterward, backward is the function executed. The local derivative of self.grad is 1.0 * out.grad (as seen in the manual propagation post [link](/portfolio/portfolio-7), and other.grad will be out.grad, the global derivative. We will later call this function to propagate the gradient.
+When I execute 2 + 2, what is really happening is `2.__add__(2)`. Then, what is received by the `__add__` function below is self (2) and other (2). First, out is defined as the primary goal of this function, which is to add these two numbers. Afterward, backward is the function executed. The local derivative of self.grad is 1.0 * out.grad (as seen in the manual propagation post [link](/portfolio_ai_learning_notes/portfolio-1), and other.grad will be out.grad, the global derivative. We will later call this function to propagate the gradient.
 
     def __add__(self,other):
         other = other if isinstance(other,value) else value(other)  
