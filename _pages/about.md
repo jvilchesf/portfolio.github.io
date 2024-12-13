@@ -35,7 +35,7 @@ Regional Data Visualization Role 🌍 📈
 ------
 In this role, the department's goals shifted. We began working with both Tableau and Power BI, each serving different purposes. Power BI was used for older, more static reports, while Tableau was the new tool promoted by the department. The main idea was to enable self-service for the various commercial departments. Our primary tasks were to teach them how to use Tableau and administer the Tableau server, ensuring that data sources were updated with the necessary data.
 
-With this new approach, we focused on creating new BigQuery database processes to make data available for them to explore and perform their own analyses.
+With this new approach, we focused on creating new BigQuery database processes to make data available and migrating processes from Oracle to BigQuery, allowing them to explore and perform their own analyses.
 
 Pause in My Career ⏸️ 📅
 ------

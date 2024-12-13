@@ -10,7 +10,10 @@ main:
     url: /portfolio_visualization/
 
   - title: "Portfolio AI"
-    url: /portfolio/
+    url: /portfolio_ai/
+
+  - title: "AI Learning Notes"
+    url: /portfolio_ai_learning_notes/
         
   - title: "CV"
     url: /files/Resume_JMVF.pdf

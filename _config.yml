@@ -195,10 +195,13 @@ collections:
   publications:
     output: true
     permalink: /:collection/:path/
-  portfolio:
+  portfolio_ai:
     output: true
     permalink: /:collection/:path/
   portfolio_visualization:
+    output: true
+    permalink: /:collection/:path/
+  portfolio_ai_learning_notes:
     output: true
     permalink: /:collection/:path/
   talks:
@@ -244,10 +247,10 @@ defaults:
       author_profile: true
       share: true
       comments: true
-  # _portfolio
+  # _portfolio_ai
   - scope:
       path: ""
-      type: portfolio
+      type: portfolio_ai
     values:
       layout: single
       author_profile: true
@@ -257,6 +260,15 @@ defaults:
   - scope:
       path: ""
       type: portfolio_visualization
+    values:
+      layout: single
+      author_profile: true
+      share: true
+      comment: true
+# _portfolio_ai_learning_notes
+  - scope:
+      path: ""
+      type: portfolio_ai_learning_notes
     values:
       layout: single
       author_profile: true
