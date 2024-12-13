@@ -1,6 +1,6 @@
 ---
 title: "[NN Basics Part 1] Manual Back Propagation"
-excerpt: "Refreshing basic concepts of back propagation, chain rule, derivates, gradients, etc...<br/><img src='/images/portfolio_ai_backprop_manual_derivate_result.png' width= 800 height= 800> "
+excerpt: "Refreshing basic concepts of back propagation, chain rule, derivates, gradients, etc...<br/><img src='https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_ai_backprop_manual_derivate_result.png' width= 800 height= 800> "
 collection: portfolio
 ---
 
@@ -34,7 +34,7 @@ It is important to have a general idea of what derivates do in a NN, and the kno
 
 If I have a function, for example a cuadratic function, where F(x) = 3x**2 - 7x + 10, I would get a curve in a graph. and if I apply the derivates formula $$ L = \lim_{h \to 0} \frac{f(a+h) - f(a)}{h} $$ what I'm doing is add an small number in the X axis and substract the original X value to get the "Slope"
 
-<img src = "/images/portfolio_ai_example_slope.png">
+<img src = "https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_ai_example_slope.png">
 
 An small exercise to apply derivates in python using basic mathematical operation, it is like this:
 
@@ -158,7 +158,7 @@ Utilize a predefined function to generate a graph representing these mathematica
 The new function {draw_graph} receives a variable called **root** to be graphed with all the values necessary to calculate it. If you call "draw_graph(d)," you could get something like this.
 
 
-<img src = '/images/portfolio_ai_graph_nodes.png'>
+<img src = 'https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_ai_graph_nodes.png'>
 
 What I've done so far is use a graph function to visualize mathematical expressions, this mathematical way to see the graph represent the forward pass in a neuronal network, where for example "d", the final value, would represent the Loss function, and the values behind are the weights. **What we like to do next is apply back propagation**.
 
@@ -166,7 +166,7 @@ What I've done so far is use a graph function to visualize mathematical expressi
 
 For this example, I worked with an structure very similar to a Neuron, where it receives inputs values and multiply it by weights to generate an output. I also applied an activation function, in this case a tanh. I want to talk mor about activation functions later, bbecause it is a very interesting topic, and I don't want to loss the point also.
 
-<img src = "/images/porfolio_ia_neuron_example.png" width = 400 height = 400>
+<img src = "https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/porfolio_ia_neuron_example.png" width = 400 height = 400>
 
 the script to inicializate the values is: 
 
@@ -188,7 +188,7 @@ the script to inicializate the values is:
 
     draw_graph(o)
 
-<img src = "/images/porfolio_ai_neuron_nodes_example.png" width = 1200 height = 2000>
+<img src = "https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/porfolio_ai_neuron_nodes_example.png" width = 1200 height = 2000>
 
 The mathematical operation values are saved in "data," which will allow us to apply backpropagation by differentiating each node with respect to **o**. Two important things to mention at this points are:
 
@@ -249,7 +249,7 @@ $$
 
 In this context, the gradient of a variable involved in a multiplication is determined by the value of the other variable in the multiplication. This means that when calculating the gradient, the contribution of one variable is directly influenced by the magnitude of the other variables. 
 
-<img src = "/images/portfolio_ai_backprop_derivate_example.png" width = 400 height= 400>  
+<img src = "https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_ai_backprop_derivate_example.png" width = 400 height= 400>  
 
 Now if I update the gradients for the variables, the graph would look like this:  
 
@@ -266,7 +266,7 @@ Now if I update the gradients for the variables, the graph would look like this:
     w2.grad = x2.data * x2w2.grad
     x2.grad = w2.data * x2w2.grad
 
-<img src = "/images/portfolio_ai_backprop_manual_derivate_result.png">  
+<img src = "https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_ai_backprop_manual_derivate_result.png">  
 
 In this way I've just calculated the gradients with respect to **o** manually. It is something quite usefull to understand how back propagation works in a Neuronal network. 
 
