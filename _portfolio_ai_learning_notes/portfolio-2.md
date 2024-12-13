@@ -1,6 +1,6 @@
 ---
 title: "[NN Basics Part 2] Automatic Back Propagation and Neuronal network"
-excerpt: "Continuation of back propagation, automatic back propagation, basic neuronal networ from scratch ad<br/><img src='/images/portfolio_ai_nn_image.png' width= 300 height= 300> "
+excerpt: "Continuation of back propagation, automatic back propagation, basic neuronal networ from scratch ad<br/><img src='https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_ai_nn_image.png' width= 300 height= 300> "
 collection: portfolio
 ---
 
@@ -42,7 +42,7 @@ The secondary goal is to propagate the gradients. For this, I referred to the ex
         return out
         
 
-<img src= "/images/portfolio_ai_backwards_function.png">
+<img src= "https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_ai_backwards_function.png">
 
 Tanh will be the last function to add _backwards, and it will look like this.
 
@@ -80,7 +80,7 @@ Now I should be able to execute _backward in the right order to get same results
 
 ### Node Graph empty grad
 
-<img src = "/images/portfolio_ai_example_automatic_backprop_graph.png">
+<img src = "https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_ai_example_automatic_backprop_graph.png">
 
 ### Exeuction and Results
 
@@ -97,7 +97,7 @@ Now I should be able to execute _backward in the right order to get same results
         x1._backward()
         draw_graph(o)
 
-<img src = "/images/portfolio_ai_example_automatic_backprop_graph_result.png">
+<img src = "https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_ai_example_automatic_backprop_graph_result.png">
 
 ### Topological sort
 
@@ -284,7 +284,7 @@ Now if I update the `tanh` calculation and run the code again considering the ch
 
 Result code execution, maybe it is necessary to zoom in a bit. 
 
-<img src = "/images/portfolio_ai_graph_open_math_expressions.png">
+<img src = "https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_ai_graph_open_math_expressions.png">
 
 # Neuronal Network
 
@@ -312,7 +312,7 @@ This `Neuron` class has two main functions: the `__init__` function, which initi
 
 The next step is to define a layer of neurons, one layer of neurons. A layer of neurons is just a list of neurons, this neurons are fully connected between the current and next layer. For example, if I'm in the input layer (current layer), its neurons are fully connected with the first hidden layer (next layer).
 
-<img src = "/images/porfolio_ai_nn_layers.png" width = 500 height= 500>
+<img src = "https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/porfolio_ai_nn_layers.png" width = 500 height= 500>
 
     import random
 
@@ -487,7 +487,7 @@ This process is repeated for each element in the resulting matrix C, and as resu
 
 ## Neuronal Network and matrix multiplication
 
-<img src = "/images/portfolio_ai_matrix_multiplication.png">
+<img src = "https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_ai_matrix_multiplication.png">
 
 
 ## Using the neuronal network
