@@ -1,6 +1,6 @@
 ---
 title: "[NN Basics Part 1] Manual Back Propagation"
-excerpt: "Refreshing basic concepts of back propagation, chain rule, derivates, gradients, etc...<br/><img src='https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_ai_backprop_manual_derivate_result.png' width= 800 height= 800> "
+excerpt: "Refreshing basic concepts of back propagation, chain rule, derivates, gradients, etc...<br/><img src='https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_ai_backprop_manual_derivate_result.png'>"
 collection: portfolio
 ---
 
