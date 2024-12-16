@@ -1,6 +1,6 @@
 ---
 title: "[Bigram Language Model Part 1] Counting frequence of  characters and predict"
-excerpt: "Predict the next character based on the character behind, with a look up table of counts.<br/><img src='/images/potfolio_ai_bigram_frontpage.png' width= 300 height= 300> "
+excerpt: "Predict the next character based on the character behind, with a look up table of counts.<br/><img src='https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/potfolio_ai_bigram_frontpage.png' width= 300 height= 300> "
 collection: portfolio
 ---
 
