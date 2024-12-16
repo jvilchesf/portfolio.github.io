@@ -14,8 +14,8 @@ You’ll find two main flows:
 2. **SQL Agent Flow** – Takes natural language queries and converts them into SQL queries executed against the SQLite database created in the Retriever Flow.
 
 <div style="display: flex;">
-  <img src="/images/portfolio_genAI_langgraph_graph_1.png" style="margin-right: 10px;" width = 400 height = 500>
-  <img src="/images/portfolio_genAI_langgraph_graph_2.png" width = 400 height = 500>
+  <img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_genAI_langgraph_graph_1.png" style="margin-right: 10px;" width = 400 height = 500>
+  <img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_genAI_langgraph_graph_2.png" width = 400 height = 500>
 </div>
 
 ---
@@ -102,7 +102,7 @@ Bank transactions often come in varied formats and languages. Some statements ar
 high-level workflow describing how the project works in two major flows:
 
 <p align="center">
-  <img src="/images/portfolio_ai_genai_agent_retriever.png" width="500" height="400">
+  <img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_ai_genai_agent_retriever.png" width="500" height="400">
 </p>
 
 
@@ -143,7 +143,7 @@ high-level workflow describing how the project works in two major flows:
    - Run the validated SQL query against the SQLite database and return the results.
 
 <p align="center">
-<img src="/images/portfolio_ai_genai_agent_sql.png" width =600 height = 200>
+<img src="https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_ai_genai_agent_sql.png" width =600 height = 200>
 </p>
 
 # Agent working
