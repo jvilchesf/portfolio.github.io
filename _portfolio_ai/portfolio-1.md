@@ -2,7 +2,7 @@
 title: "Langgraph + Langchain"
 excerpt: "Getting bank transactions, formatting and augmented the data with an LLM<br/>
 
-<img src='/images/portfolio_genAI_langgraph_graph_1.png' width= 300 height= 300> "
+<img src='https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_genAI_langgraph_graph_1.png' width= 300 height= 300> "
 collection: portfolio
 ---
 
