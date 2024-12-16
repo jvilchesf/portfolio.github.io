@@ -51,6 +51,6 @@ During the past year working as a freelancer, I decided to explore a new field w
 
 Over the last year and a half, I decided to open this black box, and I must say, it was such a great decision. Since then, I haven’t been able to stop studying and creating my own toy projects to learn more and more about these new technologies. Topics like Machine Learning and Deep Learning, along with all the math and statistics behind them, are finally making sense. It’s amazing to see how powerful and useful these algorithms can be.
 
-In the “Portfolio AI” section of this code, I want to showcase my toy projects and share all the new knowledge I’ve gained.
+In the “Portfolio AI” section of this portfolio, I want to showcase my toy projects and share all the new knowledge I’ve gained.
 
 **Thank you for taking the time to learn about my journey. I'm excited about the opportunities ahead and look forward to contributing my skills and passion to new challenges in the data and AI fields!**

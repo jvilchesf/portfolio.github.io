@@ -1,6 +1,6 @@
 ---
 title: "[NN Basics Part 2] Automatic Back Propagation and Neuronal network"
-excerpt: "Continuation of back propagation, automatic back propagation, basic neuronal networ from scratch ad<br/><img src='https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_ai_nn_image.png' width= 300 height= 300> "
+excerpt: "Continuation of back propagation, automatic back propagation, basic neuronal networ from scratch.<br/><img src='https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_ai_nn_image.png' width= 300 height= 300> "
 collection: portfolio
 ---
 

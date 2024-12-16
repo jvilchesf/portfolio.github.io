@@ -1,7 +1,16 @@
 ---
-title: "Digit Recognizer"
-excerpt: "Deep learning keras tensorflow for image classification.<br/><img src='https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_ai_4_digitRecognition.png' width= 300 height= 300 >"
+title: "Google analytics sales prediction"
+excerpt: "Xgboost to predict sales in GA4
+
+<br/><img src='https://github.com/jvilchesf/portfolio.github.io/blob/main/images/portfolio_ai_3_xgboost.png?raw=true'>"
 collection: portfolio
 ---
 
-This is an item in your portfolio. It can be have images or nice text. If you name the file .md, it will be parsed as markdown. If you name the file .html, it will be parsed as HTML. 
+
+## Explanation in progress
+
+- EDA, feature selection, feature engineering and visualization.
+- XGBoost classification and machine learning insights (EDA, Dependence plots, feature engineering).
+
+## Code 
+[link](https://www.kaggle.com/code/josmiguelvilches/ga4-sales-prediction)

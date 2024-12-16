@@ -1,7 +1,13 @@
 ---
-title: "Google analytics sales prediction"
-excerpt: "Use machine learning Xgboost to predict google analytics sales<br/><img src='https://github.com/jvilchesf/portfolio.github.io/blob/main/images/portfolio_ai_3_xgboost.png?raw=true'>"
+title: "Convolutional Neuronal Network"
+
+excerpt: "Convolutional NN, normalization, pooling, droping from scratch
+
+<br/><img src='https://raw.githubusercontent.com/jvilchesf/portfolio.github.io/refs/heads/main/images/portfolio_ai_2_cnn.png' width= 300 height= 300> "
 collection: portfolio
 ---
 
-This is an item in your portfolio. It can be have images or nice text. If you name the file .md, it will be parsed as markdown. If you name the file .html, it will be parsed as HTML. 
+### Explanation in progress ...
+
+### Code
+[link](https://colab.research.google.com/drive/1Qzmb9JzoMk4Nv-YZ-cQX71NJymIYB5u4#scrollTo=91vyYDmffCxK)
